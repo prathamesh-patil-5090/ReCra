@@ -1,0 +1,532 @@
+{
+    "intents": [
+        {
+            "tag": "tensorflow",
+            "patterns": [
+                "What is TensorFlow?",
+                "Explain TensorFlow.",
+                "What can TensorFlow be used for?",
+                "How does TensorFlow work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>TensorFlow</h3><p>TensorFlow is an open-source machine learning framework developed by Google, widely used in building complex machine learning and deep learning models.</p><h4>Key Features:</h4><ul><li>Tools for designing neural networks</li><li>Managing large datasets</li><li>Deploying models across various devices</li></ul><h4>Applications:</h4><ul><li>Image recognition</li><li>Natural language processing</li><li>Predictive analytics</li></ul><h4>Career Impact:</h4><p>Essential for AI/ML roles and data science positions.</p><h4>Learning Resources:</h4><ul><li>Coursera</li><li>TensorFlow documentation</li><li>Practical projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "keras",
+            "patterns": [
+                "What is Keras?",
+                "Explain Keras.",
+                "What are the uses of Keras?",
+                "How does Keras relate to TensorFlow?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Keras</h3><p>Keras is a high-level neural network API written in Python, capable of running on top of TensorFlow, CNTK, or Theano.</p><h4>Key Features:</h4><ul><li>Modular architecture</li><li>User-friendly interface</li><li>Extensible design</li></ul><h4>Applications:</h4><ul><li>Computer vision</li><li>Text analysis</li><li>Recommendation systems</li></ul><h4>Career Benefits:</h4><p>Employers value Keras expertise as it signifies a solid foundation in AI and neural networks.</p><h4>Learning Path:</h4><ul><li>Basic sequential models</li><li>Custom layer development</li><li>GANs implementation</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "pytorch",
+            "patterns": [
+                "What is pytorch?",
+                "Explain pytorch.",
+                "What can pytorch be used for?",
+                "How does pytorch work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>PyTorch</h3><p>PyTorch is a modern machine learning framework known for its dynamic computational graphs.</p><h4>Key Features:</h4><ul><li>Dynamic neural networks</li><li>Python integration</li><li>Extensive libraries</li></ul><h4>Applications:</h4><ul><li>Deep learning research</li><li>Computer vision</li><li>Natural language processing</li></ul><h4>Career Impact:</h4><p>Highly valued in research and industry roles.</p><h4>Learning Resources:</h4><ul><li>Official tutorials</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "machine_learning",
+            "patterns": [
+                "What is machine_learning?",
+                "Explain machine_learning.",
+                "What can machine_learning be used for?",
+                "How does machine_learning work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Machine Learning</h3><p>Machine Learning is a fundamental discipline in artificial intelligence that enables systems to learn and improve from experience.</p><h4>Key Areas:</h4><ul><li>Supervised Learning</li><li>Unsupervised Learning</li><li>Reinforcement Learning</li></ul><h4>Applications:</h4><ul><li>Predictive Analytics</li><li>Pattern Recognition</li><li>Data Mining</li></ul><h4>Career Opportunities:</h4><ul><li>Data Scientist</li><li>ML Engineer</li><li>AI Researcher</li></ul><h4>Learning Resources:</h4><ul><li>Coursera</li><li>Udemy</li><li>Official Documentation</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "deep_learning",
+            "patterns": [
+                "What is deep_learning?",
+                "Explain deep_learning.",
+                "What can deep_learning be used for?",
+                "How does deep_learning work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Deep Learning</h3><p>Deep learning is a subset of machine learning that uses neural networks with many layers.</p><h4>Key Features:</h4><ul><li>Neural networks</li><li>Large datasets</li><li>High computational power</li></ul><h4>Applications:</h4><ul><li>Image recognition</li><li>Speech recognition</li><li>Natural language processing</li></ul><h4>Career Impact:</h4><p>Essential for AI/ML roles and data science positions.</p><h4>Learning Resources:</h4><ul><li>Coursera</li><li>Udemy</li><li>Practical projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "flask",
+            "patterns": [
+                "What is flask?",
+                "Explain flask.",
+                "What can flask be used for?",
+                "How does flask work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Flask</h3><p>Flask is a micro web framework written in Python.</p><h4>Key Features:</h4><ul><li>Lightweight</li><li>Modular</li><li>Extensible</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "streamlit",
+            "patterns": [
+                "What is streamlit?",
+                "Explain streamlit.",
+                "What can streamlit be used for?",
+                "How does streamlit work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Streamlit</h3><p>Streamlit is an open-source app framework for Machine Learning and Data Science teams.</p><h4>Key Features:</h4><ul><li>Interactive apps</li><li>Easy to use</li><li>Python integration</li></ul><h4>Applications:</h4><ul><li>Data visualization</li><li>Machine learning apps</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in data science roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "react",
+            "patterns": [
+                "What is react?",
+                "Explain react.",
+                "What can react be used for?",
+                "How does react work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>React</h3><p>React is a JavaScript library for building user interfaces.</p><h4>Key Features:</h4><ul><li>Component-based</li><li>Declarative</li><li>Efficient</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>Mobile app development</li><li>Single-page applications</li></ul><h4>Career Impact:</h4><p>Highly valued in front-end development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "django",
+            "patterns": [
+                "What is django?",
+                "Explain django.",
+                "What can django be used for?",
+                "How does django work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Django</h3><p>Django is a high-level Python web framework that encourages rapid development and clean, pragmatic design.</p><h4>Key Features:</h4><ul><li>Scalable</li><li>Secure</li><li>Versatile</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "node_js",
+            "patterns": [
+                "What is node_js?",
+                "Explain node_js.",
+                "What can node_js be used for?",
+                "How does node_js work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Node.js</h3><p>Node.js is a JavaScript runtime built on Chrome's V8 JavaScript engine.</p><h4>Key Features:</h4><ul><li>Event-driven</li><li>Non-blocking I/O</li><li>Scalable</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Real-time applications</li></ul><h4>Career Impact:</h4><p>Highly valued in back-end development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "react_js",
+            "patterns": [
+                "What is react_js?",
+                "Explain react_js.",
+                "What can react_js be used for?",
+                "How does react_js work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>React.js</h3><p>React.js is a JavaScript library for building user interfaces.</p><h4>Key Features:</h4><ul><li>Component-based</li><li>Declarative</li><li>Efficient</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>Mobile app development</li><li>Single-page applications</li></ul><h4>Career Impact:</h4><p>Highly valued in front-end development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "php",
+            "patterns": [
+                "What is php?",
+                "Explain php.",
+                "What can php be used for?",
+                "How does php work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>PHP</h3><p>PHP is a popular general-purpose scripting language that is especially suited to web development.</p><h4>Key Features:</h4><ul><li>Server-side scripting</li><li>Embedded in HTML</li><li>Open-source</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Content management systems</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "laravel",
+            "patterns": [
+                "What is laravel?",
+                "Explain laravel.",
+                "What can laravel be used for?",
+                "How does laravel work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Laravel</h3><p>Laravel is a web application framework with expressive, elegant syntax.</p><h4>Key Features:</h4><ul><li>Modular</li><li>Secure</li><li>Scalable</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "magento",
+            "patterns": [
+                "What is magento?",
+                "Explain magento.",
+                "What can magento be used for?",
+                "How does magento work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Magento</h3><p>Magento is an open-source e-commerce platform written in PHP.</p><h4>Key Features:</h4><ul><li>Customizable</li><li>Scalable</li><li>Secure</li></ul><h4>Applications:</h4><ul><li>E-commerce websites</li><li>Online stores</li><li>Shopping carts</li></ul><h4>Career Impact:</h4><p>Highly valued in e-commerce development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "wordpress",
+            "patterns": [
+                "What is wordpress?",
+                "Explain wordpress.",
+                "What can wordpress be used for?",
+                "How does wordpress work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>WordPress</h3><p>WordPress is an open-source content management system (CMS) written in PHP.</p><h4>Key Features:</h4><ul><li>Customizable</li><li>Scalable</li><li>Secure</li></ul><h4>Applications:</h4><ul><li>Blogs</li><li>Websites</li><li>Online stores</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "javascript",
+            "patterns": [
+                "What is javascript?",
+                "Explain javascript.",
+                "What can javascript be used for?",
+                "How does javascript work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>JavaScript</h3><p>JavaScript is a programming language that is one of the core technologies of the World Wide Web.</p><h4>Key Features:</h4><ul><li>Client-side scripting</li><li>Dynamic</li><li>Versatile</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>Mobile app development</li><li>Game development</li></ul><h4>Career Impact:</h4><p>Highly valued in front-end development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "angular_js",
+            "patterns": [
+                "What is angular_js?",
+                "Explain angular_js.",
+                "What can angular_js be used for?",
+                "How does angular_js work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>AngularJS</h3><p>AngularJS is a JavaScript-based open-source front-end web framework.</p><h4>Key Features:</h4><ul><li>Component-based</li><li>Declarative</li><li>Efficient</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>Mobile app development</li><li>Single-page applications</li></ul><h4>Career Impact:</h4><p>Highly valued in front-end development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "c_sharp",
+            "patterns": [
+                "What is c_sharp?",
+                "Explain c_sharp.",
+                "What can c_sharp be used for?",
+                "How does c_sharp work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>C#</h3><p>C# is a modern, object-oriented programming language developed by Microsoft.</p><h4>Key Features:</h4><ul><li>Object-oriented</li><li>Type-safe</li><li>Scalable</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>Desktop applications</li><li>Game development</li></ul><h4>Career Impact:</h4><p>Highly valued in software development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "asp_net",
+            "patterns": [
+                "What is asp_net?",
+                "Explain asp_net.",
+                "What can asp_net be used for?",
+                "How does asp_net work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>ASP.NET</h3><p>ASP.NET is an open-source, server-side web-application framework designed for web development to produce dynamic web pages.</p><h4>Key Features:</h4><ul><li>Server-side scripting</li><li>Scalable</li><li>Secure</li></ul><h4>Applications:</h4><ul><li>Web development</li><li>API development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "android_development",
+            "patterns": [
+                "What is android_development?",
+                "Explain android_development.",
+                "What can android_development be used for?",
+                "How does android_development work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Android Development</h3><p>Android development is the process of creating applications for devices running the Android operating system.</p><h4>Key Features:</h4><ul><li>Java/Kotlin</li><li>Android Studio</li><li>APIs</li></ul><h4>Applications:</h4><ul><li>Mobile apps</li><li>Games</li><li>Utilities</li></ul><h4>Career Impact:</h4><p>Highly valued in mobile development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "flutter",
+            "patterns": [
+                "What is flutter?",
+                "Explain flutter.",
+                "What can flutter be used for?",
+                "How does flutter work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Flutter</h3><p>Flutter is an open-source UI software development kit created by Google.</p><h4>Key Features:</h4><ul><li>Cross-platform</li><li>Fast development</li><li>Expressive UI</li></ul><h4>Applications:</h4><ul><li>Mobile apps</li><li>Web apps</li><li>Desktop apps</li></ul><h4>Career Impact:</h4><p>Highly valued in cross-platform development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "kotlin",
+            "patterns": [
+                "What is kotlin?",
+                "Explain kotlin.",
+                "What can kotlin be used for?",
+                "How does kotlin work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Kotlin</h3><p>Kotlin is a modern, statically typed programming language that boosts productivity and developer happiness.</p><h4>Key Features:</h4><ul><li>Concise</li><li>Safe</li><li>Interoperable</li></ul><h4>Applications:</h4><ul><li>Android development</li><li>Web development</li><li>Server-side development</li></ul><h4>Career Impact:</h4><p>Highly valued in mobile and web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "xml",
+            "patterns": [
+                "What is xml?",
+                "Explain xml.",
+                "What can xml be used for?",
+                "How does xml work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>XML</h3><p>XML (Extensible Markup Language) is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable.</p><h4>Key Features:</h4><ul><li>Self-descriptive</li><li>Platform-independent</li><li>Extensible</li></ul><h4>Applications:</h4><ul><li>Data interchange</li><li>Configuration files</li><li>Web services</li></ul><h4>Career Impact:</h4><p>Highly valued in data interchange and web development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "kivy",
+            "patterns": [
+                "What is kivy?",
+                "Explain kivy.",
+                "What can kivy be used for?",
+                "How does kivy work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Kivy</h3><p>Kivy is an open-source Python library for developing multitouch applications.</p><h4>Key Features:</h4><ul><li>Cross-platform</li><li>Open-source</li><li>Customizable</li></ul><h4>Applications:</h4><ul><li>Mobile apps</li><li>Desktop apps</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in cross-platform development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "ios_development",
+            "patterns": [
+                "What is ios_development?",
+                "Explain ios_development.",
+                "What can ios_development be used for?",
+                "How does ios_development work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>iOS Development</h3><p>iOS development is the process of creating applications for devices running the iOS operating system.</p><h4>Key Features:</h4><ul><li>Swift/Objective-C</li><li>Xcode</li><li>APIs</li></ul><h4>Applications:</h4><ul><li>Mobile apps</li><li>Games</li><li>Utilities</li></ul><h4>Career Impact:</h4><p>Highly valued in mobile development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "swift",
+            "patterns": [
+                "What is swift?",
+                "Explain swift.",
+                "What can swift be used for?",
+                "How does swift work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Swift</h3><p>Swift is a powerful and intuitive programming language for iOS, macOS, watchOS, and tvOS.</p><h4>Key Features:</h4><ul><li>Fast</li><li>Safe</li><li>Expressive</li></ul><h4>Applications:</h4><ul><li>iOS development</li><li>macOS development</li><li>Server-side development</li></ul><h4>Career Impact:</h4><p>Highly valued in mobile and macOS development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "cocoa",
+            "patterns": [
+                "What is cocoa?",
+                "Explain cocoa.",
+                "What can cocoa be used for?",
+                "How does cocoa work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Cocoa</h3><p>Cocoa is Apple's native object-oriented application programming interface (API) for macOS.</p><h4>Key Features:</h4><ul><li>Object-oriented</li><li>Integrated with macOS</li><li>Rich libraries</li></ul><h4>Applications:</h4><ul><li>macOS development</li><li>iOS development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in macOS and iOS development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "cocoa_touch",
+            "patterns": [
+                "What is cocoa_touch?",
+                "Explain cocoa_touch.",
+                "What can cocoa_touch be used for?",
+                "How does cocoa_touch work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Cocoa Touch</h3><p>Cocoa Touch is a UI framework for building software programs to run on iOS, watchOS, and tvOS.</p><h4>Key Features:</h4><ul><li>Object-oriented</li><li>Integrated with iOS</li><li>Rich libraries</li></ul><h4>Applications:</h4><ul><li>iOS development</li><li>watchOS development</li><li>tvOS development</li></ul><h4>Career Impact:</h4><p>Highly valued in iOS, watchOS, and tvOS development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "xcode",
+            "patterns": [
+                "What is xcode?",
+                "Explain xcode.",
+                "What can xcode be used for?",
+                "How does xcode work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Xcode</h3><p>Xcode is an integrated development environment (IDE) for macOS containing a suite of software development tools developed by Apple.</p><h4>Key Features:</h4><ul><li>Integrated with macOS</li><li>Rich libraries</li><li>Debugging tools</li></ul><h4>Applications:</h4><ul><li>macOS development</li><li>iOS development</li><li>Prototyping</li></ul><h4>Career Impact:</h4><p>Highly valued in macOS and iOS development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_xd",
+            "patterns": [
+                "What is adobe_xd?",
+                "Explain adobe_xd.",
+                "What can adobe_xd be used for?",
+                "How does adobe_xd work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe XD</h3><p>Adobe XD is a vector-based user experience design tool for web apps and mobile apps, developed and published by Adobe Inc.</p><h4>Key Features:</h4><ul><li>Vector-based</li><li>Prototyping</li><li>Collaboration</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Prototyping</li><li>Wireframing</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "figma",
+            "patterns": [
+                "What is figma?",
+                "Explain figma.",
+                "What can figma be used for?",
+                "How does figma work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Figma</h3><p>Figma is a web-based UI/UX design tool, with additional offline features enabled by desktop applications for macOS and Windows.</p><h4>Key Features:</h4><ul><li>Web-based</li><li>Prototyping</li><li>Collaboration</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Prototyping</li><li>Wireframing</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "zeplin",
+            "patterns": [
+                "What is zeplin?",
+                "Explain zeplin.",
+                "What can zeplin be used for?",
+                "How does zeplin work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Zeplin</h3><p>Zeplin is a collaboration tool for UI designers and front-end developers.</p><h4>Key Features:</h4><ul><li>Collaboration</li><li>Design handoff</li><li>Integration with design tools</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Prototyping</li><li>Design handoff</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "balsamiq",
+            "patterns": [
+                "What is balsamiq?",
+                "Explain balsamiq.",
+                "What can balsamiq be used for?",
+                "How does balsamiq work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Balsamiq</h3><p>Balsamiq is a rapid wireframing tool that helps you work faster and smarter.</p><h4>Key Features:</h4><ul><li>Wireframing</li><li>Prototyping</li><li>Collaboration</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Prototyping</li><li>Wireframing</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "ui",
+            "patterns": [
+                "What is ui?",
+                "Explain ui.",
+                "What can ui be used for?",
+                "How does ui work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>UI</h3><p>UI (User Interface) design is the process of making interfaces in software or computerized devices with a focus on looks or style.</p><h4>Key Features:</h4><ul><li>Visual design</li><li>Interaction design</li><li>Usability</li></ul><h4>Applications:</h4><ul><li>Web design</li><li>Mobile app design</li><li>Software design</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "prototyping",
+            "patterns": [
+                "What is prototyping?",
+                "Explain prototyping.",
+                "What can prototyping be used for?",
+                "How does prototyping work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Prototyping</h3><p>Prototyping is the process of creating an early sample, model, or release of a product to test a concept or process.</p><h4>Key Features:</h4><ul><li>Concept testing</li><li>Usability testing</li><li>Design iteration</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Product design</li><li>Software development</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design and product development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "wireframes",
+            "patterns": [
+                "What is wireframes?",
+                "Explain wireframes.",
+                "What can wireframes be used for?",
+                "How does wireframes work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Wireframes</h3><p>Wireframes are a visual guide that represents the skeletal framework of a website or application.</p><h4>Key Features:</h4><ul><li>Layout design</li><li>Structure</li><li>Usability</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Web design</li><li>Mobile app design</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "storyframes",
+            "patterns": [
+                "What is storyframes?",
+                "Explain storyframes.",
+                "What can storyframes be used for?",
+                "How does storyframes work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Storyframes</h3><p>Storyframes are a visual representation of a user's journey through a product or service.</p><h4>Key Features:</h4><ul><li>User journey</li><li>Interaction design</li><li>Usability</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Product design</li><li>Service design</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design and product development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_photoshop",
+            "patterns": [
+                "What is adobe_photoshop?",
+                "Explain adobe_photoshop.",
+                "What can adobe_photoshop be used for?",
+                "How does adobe_photoshop work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe Photoshop</h3><p>Adobe Photoshop is a raster graphics editor developed and published by Adobe Inc. for Windows and macOS.</p><h4>Key Features:</h4><ul><li>Image editing</li><li>Graphic design</li><li>Photo retouching</li></ul><h4>Applications:</h4><ul><li>Graphic design</li><li>Photo editing</li><li>Web design</li></ul><h4>Career Impact:</h4><p>Highly valued in graphic design and photo editing roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_illustrator",
+            "patterns": [
+                "What is adobe_illustrator?",
+                "Explain adobe_illustrator.",
+                "What can adobe_illustrator be used for?",
+                "How does adobe_illustrator work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe Illustrator</h3><p>Adobe Illustrator is a vector graphics editor and design program developed and marketed by Adobe Inc.</p><h4>Key Features:</h4><ul><li>Vector graphics</li><li>Graphic design</li><li>Illustration</li></ul><h4>Applications:</h4><ul><li>Graphic design</li><li>Illustration</li><li>Web design</li></ul><h4>Career Impact:</h4><p>Highly valued in graphic design and illustration roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_after_effects",
+            "patterns": [
+                "What is adobe_after_effects?",
+                "Explain adobe_after_effects.",
+                "What can adobe_after_effects be used for?",
+                "How does adobe_after_effects work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe After Effects</h3><p>Adobe After Effects is a digital visual effects, motion graphics, and compositing application developed by Adobe Inc.</p><h4>Key Features:</h4><ul><li>Motion graphics</li><li>Visual effects</li><li>Compositing</li></ul><h4>Applications:</h4><ul><li>Video editing</li><li>Animation</li><li>Special effects</li></ul><h4>Career Impact:</h4><p>Highly valued in video editing and animation roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_premier_pro",
+            "patterns": [
+                "What is adobe_premier_pro?",
+                "Explain adobe_premier_pro.",
+                "What can adobe_premier_pro be used for?",
+                "How does adobe_premier_pro work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe Premiere Pro</h3><p>Adobe Premiere Pro is a timeline-based video editing software application developed by Adobe Inc.</p><h4>Key Features:</h4><ul><li>Video editing</li><li>Timeline-based</li><li>Integration with other Adobe products</li></ul><h4>Applications:</h4><ul><li>Video editing</li><li>Film production</li><li>Content creation</li></ul><h4>Career Impact:</h4><p>Highly valued in video editing and film production roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "adobe_indesign",
+            "patterns": [
+                "What is adobe_indesign?",
+                "Explain adobe_indesign.",
+                "What can adobe_indesign be used for?",
+                "How does adobe_indesign work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>Adobe InDesign</h3><p>Adobe InDesign is a desktop publishing and page layout designing software application produced by Adobe Inc.</p><h4>Key Features:</h4><ul><li>Page layout</li><li>Typography</li><li>Graphic design</li></ul><h4>Applications:</h4><ul><li>Print design</li><li>Digital publishing</li><li>Graphic design</li></ul><h4>Career Impact:</h4><p>Highly valued in print design and digital publishing roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "user_research",
+            "patterns": [
+                "What is user_research?",
+                "Explain user_research.",
+                "What can user_research be used for?",
+                "How does user_research work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>User Research</h3><p>User research focuses on understanding user behaviors, needs, and motivations through observation techniques, task analysis, and other feedback methodologies.</p><h4>Key Features:</h4><ul><li>User interviews</li><li>Surveys</li><li>Usability testing</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Product design</li><li>Service design</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design and product development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        },
+        {
+            "tag": "user_experience",
+            "patterns": [
+                "What is user_experience?",
+                "Explain user_experience.",
+                "What can user_experience be used for?",
+                "How does user_experience work?"
+            ],
+            "responses": [
+                "<div class='skill-description'><h3>User Experience</h3><p>User experience (UX) design is the process of creating products that provide meaningful and relevant experiences to users.</p><h4>Key Features:</h4><ul><li>Usability</li><li>Interaction design</li><li>User research</li></ul><h4>Applications:</h4><ul><li>UI/UX design</li><li>Product design</li><li>Service design</li></ul><h4>Career Impact:</h4><p>Highly valued in UI/UX design and product development roles.</p><h4>Learning Resources:</h4><ul><li>Official documentation</li><li>Online courses</li><li>Community projects</li></ul></div>"
+            ]
+        }
+    ]
+}

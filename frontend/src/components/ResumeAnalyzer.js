@@ -102,25 +102,75 @@ const ResumeAnalyzer = () => {
       formData.append('job_description', jobDescription);
       formData.append('analysis_type', analysisType);
 
-      setAiMessages(prev => [...prev, {
-        type: 'ai',
-        text: `Analyzing your resume for ${analysisType.replace('_', ' ')}...`
-      }]);
-
       // Simulate API call with timeout
       await new Promise(resolve => setTimeout(resolve, 1500));
       
-      const responses = {
-        analyze_resume: "Based on your resume analysis:\n\n• Strong technical background in React and Python development\n• Good experience with modern web technologies\n• Clear demonstration of project leadership\n• Effective communication of technical concepts",
-        improve_skills: "Here are my recommended improvements:\n\n• Consider adding cloud certification (AWS/Azure)\n• Strengthen experience with CI/CD pipelines\n• Add more quantifiable achievements\n• Include specific examples of problem-solving",
-        match_percentage: "Let me break down the job match for you:\n\n• Overall Match: 85%\n• Technical Skills: 90%\n• Experience Level: 80%\n• Required Qualifications: 85%"
-      };
+      let responseText = '';
       
+      switch(analysisType) {
+        case 'analyze_resume':
+          const analyzeData = {
+            "Missing Skills Analysis": {
+              "Data Science": ["machine learning"],
+              "Web Development": ["node js", "react js", "php", "laravel", "magento", "wordpress", "angular js", "c#", "asp.net"],
+              "Android Development": ["android", "android development", "flutter", "kotlin", "xml", "kivy"],
+              "iOS Development": ["ios", "ios development", "swift", "cocoa", "cocoa touch", "xcode"],
+              "UI/UX Design": ["ux", "adobe xd", "figma", "zeplin", "balsamiq", "prototyping"],
+              "Other Skills": ["english", "communication", "writing", "microsoft office", "leadership"]
+            }
+          };
+          
+          responseText = "```json\n" + JSON.stringify(analyzeData, null, 2) + "\n```";
+          break;
+
+        case 'improve_skills':
+          const suggestData = {
+            Feedback: [
+              "Enhance your Data Science skills by learning ['machine learning']",
+              "Improve your Web Development skills by learning ['node js', 'react js', 'php']",
+              // ... other feedback
+            ]
+          };
+          
+          responseText = "Here are the recommended improvements:\n\n";
+          suggestData.Feedback.forEach(feedback => {
+            responseText += `- ${feedback}\n`;
+          });
+          break;
+
+        case 'match_percentage':
+          const matchData = {
+            "Matched Skills": {
+              "Web Development": ["django"],
+              "Other Skills": ["english"]
+            },
+            "Missing Skills": {
+              "UI/UX Design": ["ui"]
+            }
+          };
+          
+          responseText = "Resume to Job Match Analysis:\n\n";
+          responseText += "Matched Skills:\n";
+          Object.entries(matchData["Matched Skills"]).forEach(([category, skills]) => {
+            if (skills.length > 0) {
+              responseText += `- ${category}: ${skills.join(', ')}\n`;
+            }
+          });
+          responseText += "\nMissing Skills:\n";
+          Object.entries(matchData["Missing Skills"]).forEach(([category, skills]) => {
+            if (skills.length > 0) {
+              responseText += `- ${category}: ${skills.join(', ')}\n`;
+            }
+          });
+          break;
+      }
+
       setAiMessages(prev => [...prev, {
         type: 'ai',
-        text: responses[analysisType]
+        text: responseText
       }]);
       setActiveStep(analysisType);
+
     } catch (err) {
       setAiMessages(prev => [...prev, {
         type: 'ai',

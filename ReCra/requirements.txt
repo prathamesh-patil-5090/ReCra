@@ -1,0 +1,3 @@
+tensorflow==2.7.0
+protobuf==3.20.3
+# ...existing requirements...
