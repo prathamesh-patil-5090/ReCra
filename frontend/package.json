@@ -5,7 +5,10 @@
   "dependencies": {
     "@headlessui/react": "^2.2.0",
     "@heroicons/react": "^2.2.0",
+    "axios": "^1.7.9",
+    "bootstrap": "^5.3.3",
     "cra-template": "1.2.0",
+    "jquery": "^3.7.1",
     "lucide-react": "^0.469.0",
     "postcss-preset-env": "^10.1.2",
     "react": "^19.0.0",

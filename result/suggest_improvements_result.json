@@ -1,0 +1,11 @@
+{
+    "message": "Recommendations to enhance your profile",
+    "Feedback": [
+        "Enhance your Data Science skills by learning ['machine learning', 'database', 'optimization', 'algorithms'].",
+        "Improve your Web Development skills by learning ['aws', 'azure', 'boto3', 'postgresql', 'rds', 'celery', 'sqs', 'lambda', 'reactjs', 'nosql', 'api', 'cloud', 'database', 'task queue'].",
+        "Expand your Android Development skills by learning ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy'].",
+        "Grow your iOS Development skills by learning ['ios', 'ios development', 'swift', 'cocoa', 'cocoa touch', 'xcode'].",
+        "Strengthen your UI/UX Design skills by learning ['ux', 'adobe xd', 'figma', 'zeplin', 'balsamiq', 'prototyping', 'wireframes', 'storyframes', 'adobe photoshop', 'photoshop', 'editing', 'adobe illustrator', 'illustrator', 'adobe after effects', 'after effects', 'adobe premier pro', 'premier pro', 'adobe indesign', 'indesign', 'wireframe', 'solid', 'grasp', 'user research'].",
+        "Enhance your profile with additional skills like ['english', 'communication', 'writing', 'microsoft office', 'leadership', 'customer management', 'social media']."
+    ]
+}

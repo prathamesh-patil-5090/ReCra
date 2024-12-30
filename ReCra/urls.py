@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, re_path
 from django.views.generic import TemplateView
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,7 +28,10 @@ urlpatterns = [
     path('analyze_resume/', views.analyze_resume, name='analyze_resume'),
     path('suggest_improvements/', views.suggest_improvements, name='suggest_improvements'),
     path('check_match/', views.check_match, name='check_match'),
+    path('analysis/<str:analysis_type>/', views.serve_analysis_json, name='serve_analysis_json'),
+    path('analysis-analyze-resume/', views.get_analysis_analyze_resume, name='analysis_analyze_resume'),
 
     # Catch-all pattern to serve frontend's index.html
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
+  + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

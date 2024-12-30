@@ -2,6 +2,29 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Loader2, Upload, X, FileText, AlertCircle, MessageSquare } from 'lucide-react';
 import Typed from 'typed.js';
 import StepCard from './stepCard.js';
+import axios from 'axios';
+
+// Configure axios defaults
+axios.defaults.baseURL = 'http://localhost:8000';
+axios.defaults.withCredentials = true;
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+
+// Get CSRF token from cookie
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
 
 // Custom hook for Typed.js
 const useTyped = (el, text) => {
@@ -88,7 +111,7 @@ const ResumeAnalyzer = () => {
       return;
     }
 
-    if (!jobDescription.trim()) {
+    if (analysisType !== 'analyze_resume' && !jobDescription.trim()) {
       setError('Please enter a job description');
       return;
     }
@@ -99,69 +122,99 @@ const ResumeAnalyzer = () => {
     try {
       const formData = new FormData();
       formData.append('resume', file);
-      formData.append('job_description', jobDescription);
-      formData.append('analysis_type', analysisType);
+      formData.append('job_description', jobDescription);  // Make sure this is passed
 
-      // Simulate API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      let responseText = '';
-      
+      let endpoint;
       switch(analysisType) {
         case 'analyze_resume':
-          const analyzeData = {
-            "Missing Skills Analysis": {
-              "Data Science": ["machine learning"],
-              "Web Development": ["node js", "react js", "php", "laravel", "magento", "wordpress", "angular js", "c#", "asp.net"],
-              "Android Development": ["android", "android development", "flutter", "kotlin", "xml", "kivy"],
-              "iOS Development": ["ios", "ios development", "swift", "cocoa", "cocoa touch", "xcode"],
-              "UI/UX Design": ["ux", "adobe xd", "figma", "zeplin", "balsamiq", "prototyping"],
-              "Other Skills": ["english", "communication", "writing", "microsoft office", "leadership"]
+          endpoint = 'analyze_resume_view';  // Remove trailing slash
+          break;
+        case 'improve_skills':
+          endpoint = 'suggest_improvements';
+          break;
+        case 'match_percentage':
+          endpoint = 'check_match';
+          break;
+        default:
+          setError('Invalid analysis type');
+          setLoading(false);
+          return;
+      }
+
+      console.log('Making request to:', endpoint);
+      console.log('Job Description:', jobDescription);  // Debug log
+
+      const response = await axios({
+        method: 'post',
+        url: `/${endpoint}/`,
+        data: formData,
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+        withCredentials: true
+      });
+
+      console.log('Server Response:', response);  // Debug log
+
+      // Wait for 5 seconds
+      await new Promise(resolve => setTimeout(resolve, 5000));
+
+      console.log('Fetching JSON from:', `/analysis/${analysisType}`);
+      // Fetch the analysis result JSON file
+      const jsonResponse = await axios.get(`/analysis/${analysisType}`);
+      console.log('JSON Response:', jsonResponse.data);
+
+      const analysisData = jsonResponse.data;
+
+      let responseText = '';
+
+      switch(analysisType) {
+        case 'analyze_resume':
+          responseText = "Resume Analysis Results:\n\n";
+          responseText += "Missing Skills Analysis:\n";
+          Object.entries(analysisData["Missing Skills Analysis"]).forEach(([category, skills]) => {
+            if (skills.length > 0) {
+              responseText += `\n${category}:\n${skills.map(skill => `- ${skill}`).join('\n')}`;
             }
-          };
-          
-          responseText = "```json\n" + JSON.stringify(analyzeData, null, 2) + "\n```";
+          });
+          if (analysisData.Feedback) {
+            responseText += "\n\nRecommendations:\n";
+            analysisData.Feedback.forEach(feedback => {
+              responseText += `\n${feedback}`;
+            });
+          }
           break;
 
         case 'improve_skills':
-          const suggestData = {
-            Feedback: [
-              "Enhance your Data Science skills by learning ['machine learning']",
-              "Improve your Web Development skills by learning ['node js', 'react js', 'php']",
-              // ... other feedback
-            ]
-          };
-          
-          responseText = "Here are the recommended improvements:\n\n";
-          suggestData.Feedback.forEach(feedback => {
-            responseText += `- ${feedback}\n`;
-          });
+          responseText = "Improvement Suggestions:\n\n";
+          if (analysisData.Feedback) {
+            analysisData.Feedback.forEach(feedback => {
+              responseText += `${feedback}\n`;
+            });
+          }
           break;
 
         case 'match_percentage':
-          const matchData = {
-            "Matched Skills": {
-              "Web Development": ["django"],
-              "Other Skills": ["english"]
-            },
-            "Missing Skills": {
-              "UI/UX Design": ["ui"]
-            }
-          };
-          
           responseText = "Resume to Job Match Analysis:\n\n";
-          responseText += "Matched Skills:\n";
-          Object.entries(matchData["Matched Skills"]).forEach(([category, skills]) => {
-            if (skills.length > 0) {
-              responseText += `- ${category}: ${skills.join(', ')}\n`;
-            }
-          });
-          responseText += "\nMissing Skills:\n";
-          Object.entries(matchData["Missing Skills"]).forEach(([category, skills]) => {
-            if (skills.length > 0) {
-              responseText += `- ${category}: ${skills.join(', ')}\n`;
-            }
-          });
+          if (analysisData["Matched Skills"]) {
+            responseText += "Matched Skills:\n";
+            Object.entries(analysisData["Matched Skills"]).forEach(([category, skills]) => {
+              if (skills.length > 0) {
+                responseText += `${category}: ${skills.join(', ')}\n`;
+              }
+            });
+          }
+          if (analysisData["Missing Skills"]) {
+            responseText += "\nMissing Skills:\n";
+            Object.entries(analysisData["Missing Skills"]).forEach(([category, skills]) => {
+              if (skills.length > 0) {
+                responseText += `${category}: ${skills.join(', ')}\n`;
+              }
+            });
+          }
+          break;
+        default:
+          responseText = "Sorry, I encountered an error. The requested analysis type is not supported.";
           break;
       }
 
@@ -172,9 +225,26 @@ const ResumeAnalyzer = () => {
       setActiveStep(analysisType);
 
     } catch (err) {
+      console.error('Full error:', err);
+      console.error('Error details:', {
+        message: err.message,
+        response: err.response?.data,
+        status: err.response?.status,
+        endpoint: err.config?.url,
+        method: err.config?.method,
+        headers: err.config?.headers
+      });
+      
+      let errorMessage = 'An error occurred while processing your request.';
+      if (err.response?.data?.error) {
+        errorMessage = err.response.data.error;
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+      
       setAiMessages(prev => [...prev, {
         type: 'ai',
-        text: "I encountered an error during the analysis. Please try again."
+        text: `Error: ${errorMessage}`
       }]);
     } finally {
       setLoading(false);

@@ -1,0 +1,36 @@
+{
+  "Matched Skills": {
+    "Data Science": [
+      "python",
+      "sql"
+    ],
+    "Web Development": [
+      "python",
+      "sql",
+      "django",
+      "javascript"
+    ],
+    "Android Development": [],
+    "iOS Development": [],
+    "UI/UX Design": [
+      "ui"
+    ],
+    "Other Skills": []
+  },
+  "Missing Skills": {
+    "Data Science": [
+      "database"
+    ],
+    "Web Development": [
+      "api",
+      "postgresql",
+      "database"
+    ],
+    "Android Development": [],
+    "iOS Development": [],
+    "UI/UX Design": [
+      "user experience design"
+    ],
+    "Other Skills": []
+  }
+}
