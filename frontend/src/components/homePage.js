@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, FileText, Upload, Search, Star, Users, Award, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Update the import path
+import { useAuth } from '../contexts/AuthContext';
 import StepCard from './stepCard';
 
 const HomePage = () => {

@@ -1,10 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {ReactTyped} from 'react-typed'; // Fix import
+import {ReactTyped} from 'react-typed'; 
 import StepCard from './stepCard';
 import { FaSearchPlus, FaLightbulb, FaCheckCircle } from 'react-icons/fa';
 import { MessageSquare, Loader2 } from 'lucide-react';
 
-// Update TypedMessage component to use ReactTyped
 const TypedMessage = ({ text }) => {
   return (
     <ReactTyped
@@ -26,12 +25,11 @@ const AnalysisCards = () => {
   ]);
   const chatContainerRef = useRef(null);
 
-  // Update the chat container scroll effect
   useEffect(() => {
     if (chatContainerRef.current) {
       setTimeout(() => {
         chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-      }, 100); // Add small delay to ensure typing animation has started
+      }, 100);
     }
   }, [aiMessages]);
 
@@ -55,7 +53,7 @@ const AnalysisCards = () => {
   }
 
   const formatAnalysisResponse = (data, analysisType) => {
-    if (analysisType === 1) { // Resume Analysis
+    if (analysisType === 1) { 
       let response = "📝 Resume Analysis:\n\n";
       
       // Present Skills Analysis
@@ -94,14 +92,14 @@ const AnalysisCards = () => {
       return response;
     }
   
-    if (analysisType === 2) { // suggest_improvements endpoint
+    if (analysisType === 2) { 
       let response = "📊 Skill Analysis Results:\n\n";
   
       // Add Skill Analysis
       if (data["Skill Analysis"]) {
         Object.entries(data["Skill Analysis"]).forEach(([category, analysis]) => {
-          response += `${category}:\n`;  // Fixed missing semicolon
-          response += `Current Strength: ${Math.round(analysis.strength * 100)}%\n`;  // Fixed missing semicolon
+          response += `${category}:\n`; 
+          response += `Current Strength: ${Math.round(analysis.strength * 100)}%\n`;
           
           if (analysis.present_skills.length > 0) {
             response += `✅ Present Skills:\n${randomizeSkills(analysis.present_skills).map(skill => `  • ${skill}`).join('\n')}\n`;
@@ -115,7 +113,7 @@ const AnalysisCards = () => {
             response += `⚠️ Important Priority:\n${randomizeSkills(analysis.priority_improvements.important).map(skill => `  • ${skill}`).join('\n')}\n`;
           }
           
-          response += '\n';  // Fixed missing semicolon
+          response += '\n';
         });
       }
   
@@ -123,9 +121,9 @@ const AnalysisCards = () => {
       if (data["Prioritized Recommendations"]) {
         response += "\n💡 Recommendations:\n\n";
         data["Prioritized Recommendations"].forEach(rec => {
-          response += `${rec.priority} Priority - ${rec.category}:\n`;  // Fixed missing semicolon
-          response += `• ${rec.message}\n`;  // Fixed missing semicolon
-          response += `  Impact: ${rec.impact}\n\n`;  // Fixed missing semicolon
+          response += `${rec.priority} Priority - ${rec.category}:\n`;  
+          response += `• ${rec.message}\n`; 
+          response += `  Impact: ${rec.impact}\n\n`; 
         });
       }
   
@@ -133,16 +131,15 @@ const AnalysisCards = () => {
       if (data["Learning Path"]) {
         response += "\n📚 Learning Path:\n\n";
         Object.entries(data["Learning Path"]).forEach(([category, path]) => {
-          response += `${category}:\n`;  // Fixed missing semicolon
-          response += `• Current Level: ${path["Current Level"]}\n`;  // Fixed missing semicolon
-          response += `• Next Steps: ${path["Next Steps"]}\n\n`;  // Fixed missing semicolon
+          response += `${category}:\n`;
+          response += `• Current Level: ${path["Current Level"]}\n`;
+          response += `• Next Steps: ${path["Next Steps"]}\n\n`; 
         });
       }
   
       return response;
     }
   
-    // ... existing formatAnalysisResponse code for other endpoints...
     let formattedResponse = "Here's what I found:\n\n";
 
     if (data["Missing Skills Analysis"]) {
@@ -272,7 +269,6 @@ const AnalysisCards = () => {
     }
   ];
 
-  // Fix error in SVG markup
   const ErrorIcon = () => (
     <svg className="h-5 w-5 text-red-400" viewBox="0 0 20 20" fill="currentColor">
       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -294,7 +290,6 @@ const AnalysisCards = () => {
               <FaSearchPlus className="w-5 h-5 mr-2 text-black-500" />
               Detailed Analysis
             </div>
-            {/* Fixed adjacent JSX issue */}
             <div className="flex items-center text-sm text-gray-500">
               <FaLightbulb className="w-5 h-5 mr-2 text-black-500" />
               Smart Recommendations

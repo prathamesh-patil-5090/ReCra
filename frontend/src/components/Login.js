@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Fixed import path
+import { useAuth } from '../contexts/AuthContext';
 import Spinner from './common/Spinner';
 import { Github, Mail } from 'lucide-react';
 
@@ -48,7 +48,7 @@ const Login = () => {
                 password: formData.password,
                 remember: formData.rememberMe
             });
-            navigate('/'); // Changed from /dashboard to /
+            navigate('/');
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
         } finally {

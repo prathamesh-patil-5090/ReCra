@@ -34,7 +34,7 @@ urlpatterns = [
     path('api/login/', views.login_user, name='login'),
     path('api/logout/', views.logout_user, name='logout'),
 
-    # Catch-all pattern to serve frontend's index.html
+
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

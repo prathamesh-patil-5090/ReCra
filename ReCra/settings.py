@@ -170,9 +170,6 @@ CORS_ALLOW_HEADERS = [
 
 CORS_EXPOSE_HEADERS = ['Content-Type', 'X-CSRFToken']
 
-# Remove CORS_ALLOW_ALL_ORIGINS since we're explicitly setting allowed origins
-# CORS_ALLOW_ALL_ORIGINS = True  # Comment this out
-
 # Ensure static files are properly configured
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -194,8 +191,8 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 # CSRF settings
-CSRF_COOKIE_SAMESITE = None  # Changed from 'Lax' to None
-CSRF_COOKIE_SECURE = False  # For development only
+CSRF_COOKIE_SAMESITE = None  
+CSRF_COOKIE_SECURE = False 
 CSRF_COOKIE_HTTPONLY = False
 CSRF_USE_SESSIONS = False
 CSRF_COOKIE_NAME = 'csrftoken'

@@ -420,9 +420,9 @@ def suggest_improvements(request):
                     
                     # Prioritize missing skills
                     priority_skills = {
-                        "critical": missing[:2],  # Top 2 most important missing skills
-                        "important": missing[2:5],  # Next 3 important skills
-                        "optional": missing[5:]  # Remaining skills
+                        "critical": missing[:2],  
+                        "important": missing[2:5], 
+                        "optional": missing[5:] 
                     }
                     
                     skill_analysis[category] = {

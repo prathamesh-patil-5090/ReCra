@@ -30,18 +30,18 @@ const NavBar = () => {
     <nav className="relative bg-white border-b">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo - Adjusted size */}
+          {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" className="h-14"> {/* Changed from h-16 to h-12 */}
+            <Link to="/" className="h-14">
               <img 
                 src={LogoAnimation} 
                 alt="ReCra Logo" 
-                className="h-full w-auto max-h-14" // Added max-h-12 and kept aspect ratio
+                className="h-full w-auto max-h-14"
               />
             </Link>
           </div>
 
-          {/* Desktop Navigation - Justified */}
+          {/* Desktop Navigation */}
           <div className="hidden sm:flex flex-1 justify-center">
             <div className="flex space-x-12">
               {defaultMenuItems.map((item) => (

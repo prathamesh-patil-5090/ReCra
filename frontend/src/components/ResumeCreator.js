@@ -106,14 +106,12 @@ const ResumeCreator = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Add this new function to prevent form submission
   const handleSubmit = (e) => {
-    e.preventDefault();  // This prevents the page refresh
+    e.preventDefault();
   };
 
-  // Update button click handlers
   const moveSection = (e, index, direction) => {
-    e.preventDefault();  // Prevent form submission
+    e.preventDefault();  
     const newOrder = [...sectionOrder];
     if (direction === 'up' && index > 0) {
       [newOrder[index], newOrder[index - 1]] = [newOrder[index - 1], newOrder[index]];
@@ -128,7 +126,7 @@ const ResumeCreator = () => {
       <div className="flex items-center mb-3">
         <div className="flex items-center gap-2 mr-4">
           <button
-            type="button" // Add this to prevent form submission
+            type="button"
             onClick={(e) => moveSection(e, index, 'up')}
             disabled={index === 0}
             className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-30"
@@ -136,7 +134,7 @@ const ResumeCreator = () => {
             <FaArrowUp className="w-4 h-4" />
           </button>
           <button
-            type="button" // Add this to prevent form submission
+            type="button"
             onClick={(e) => moveSection(e, index, 'down')}
             disabled={index === SECTIONS.length - 1}
             className="p-1 text-gray-500 hover:text-gray-700 disabled:opacity-30"
@@ -444,7 +442,6 @@ const ResumeCreator = () => {
         return renderEducation();
       case 'projects':
         return renderProjects();
-      // ... add other section renders
       default:
         return null;
     }
@@ -622,7 +619,6 @@ const ResumeCreator = () => {
   // Add handle print function
   const handlePrint = useCallback(() => {
     if (componentRef.current) {
-      // Use the browser's print functionality
       window.print();
     }
   }, []);
@@ -741,7 +737,6 @@ const ResumeCreator = () => {
     }
   `;
 
-  // Update the container styles for proper side-by-side view
   return (
     <>
       <style>{printStyles}</style>

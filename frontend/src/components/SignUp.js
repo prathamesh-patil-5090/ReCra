@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../contexts/AuthContext'; // Fixed import path
+import { useAuth } from '../contexts/AuthContext';
 
 const SignUp = () => {
     const { signup } = useAuth();
@@ -62,7 +62,7 @@ const SignUp = () => {
                 email: formData.email,
                 password: formData.password
             });
-            navigate('/'); // Changed from /dashboard to /
+            navigate('/');
         } catch (err) {
             setError(err.message);
         } finally {

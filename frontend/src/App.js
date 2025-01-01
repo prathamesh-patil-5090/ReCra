@@ -16,7 +16,7 @@ import './App.css';
 
 function App() {
   return (
-    <AuthProvider> {/* Wrap the entire app with AuthProvider */}
+    <AuthProvider>
       <div className="min-h-screen flex flex-col">
         <NavBar brandName="ReCra" />
         <div className="flex-grow">

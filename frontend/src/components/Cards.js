@@ -84,13 +84,12 @@ const Cards = () => {
   ];
 
   function randomizeSkills(skills) {
-    // Shuffle and slice to max 3
     if (!Array.isArray(skills) || skills.length <= 3) return skills;
     for (let i = skills.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [skills[i], skills[j]] = [skills[j], skills[i]];
     }
-    return skills.slice(0, Math.floor(Math.random() * 2) + 2); // Random 2-3
+    return skills.slice(0, Math.floor(Math.random() * 2) + 2); 
   }
 
   const formatResults = (data) => {
@@ -103,7 +102,7 @@ const Cards = () => {
           {data["Missing Skills"] && (
             <div className="divide-y divide-gray-200">
               {Object.entries(data["Missing Skills"]).map(([category, skills]) => {
-                const limitedSkills = randomizeSkills(skills); // Use helper
+                const limitedSkills = randomizeSkills(skills); 
                 if (!limitedSkills || !limitedSkills.length) return null;
                 
                 return (

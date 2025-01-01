@@ -119,8 +119,6 @@ const Pricing = () => {
   ];
 
   return (
-    // Remove TooltipProvider
-    // <TooltipProvider>
     <>
       <div className="py-12 px-4 max-w-7xl mx-auto">
         <div className="text-center mb-12">
@@ -222,7 +220,6 @@ const Pricing = () => {
         </p>
       </div>
     </>
-    // </TooltipProvider>
   );
 };
 
