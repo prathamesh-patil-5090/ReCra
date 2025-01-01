@@ -1,98 +1,168 @@
-# ReCra
+# ReCra - AI-Powered Resume Creator & Analyzer
 
-ReCra is a comprehensive Resume Creator and Analyzer platform designed to help users craft highly customizable resumes and analyze them with ATS-like scoring features. This project leverages Python (Django) for the backend and React.js for the frontend.
+[![Python 3.9.13](https://img.shields.io/badge/python-3.9.13-blue.svg)](https://www.python.org/downloads/release/python-3913/)
+[![React](https://img.shields.io/badge/React-18.x-blue.svg)](https://reactjs.org/)
+[![Django](https://img.shields.io/badge/Django-4.x-green.svg)](https://www.djangoproject.com/)
 
-## Installation Guide
+ReCra is a modern, AI-powered Resume Creator and Analyzer platform that combines the power of Django and React.js to help users create ATS-optimized resumes. The platform features drag-and-drop customization and leverages machine learning for resume analysis and scoring.
 
-### Prerequisites
-1. **Python 3.9.13**
-   - Download and install Python 3.9.13 from [here](https://www.python.org/downloads/release/python-3913/).
+## 🚀 Key Features
 
-2. **Node.js**
-   - Ensure Node.js is installed for managing the frontend.
+- **Smart Resume Builder**
+  - Drag-and-drop section management
+  - Real-time preview and editing
+  - Intelligent formatting with markdown support
+  - Dynamic template system
 
-3. **Visual Studio Build Tools**
-   - Download and install the Visual Studio Build Tools from [here](https://visualstudio.microsoft.com/visual-cpp-build-tools/).
-   - During installation, include the Windows 10/11 SDK and C/C++ build tools required for packages like `numpy`, `spacy`, and `tensorflow`.
+- **AI-Powered Analysis**
+  - ATS compatibility scoring
+  - Keyword optimization suggestions
+  - Content quality assessment
+  - Industry-specific recommendations
 
-### Steps to Set Up
+- **Export Options**
+  - High-quality PDF export
+  - Multiple format support (PDF, DOCX)
+  - Custom styling options
 
-#### Backend Setup
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/prathamesh-patil-5090/ReCra.git
-   cd ReCra
-   ```
+## 🛠 Tech Stack
 
-2. Create and activate a virtual environment:
-   ```bash
-   python -m venv .venv
-   source .venv/bin/activate   # On Windows: .venv\Scripts\activate
-   ```
+- **Backend**: Django 4.x, Python 3.9.13
+- **Frontend**: React 18.x, Material-UI
+- **AI/ML**: TensorFlow, spaCy
+- **Database**: PostgreSQL
+- **Authentication**: JWT
 
-3. Install the required libraries:
-   ```bash
-   pip install -r requirements.txt
-   ```
+## 📋 Prerequisites
 
-4. Apply database migrations:
-   ```bash
-   python manage.py makemigrations
-   python manage.py migrate
-   ```
+- Python 3.9.13
+- Node.js 16.x or higher
+- Visual Studio Build Tools
+- PostgreSQL (optional, SQLite by default)
 
-#### Frontend Setup
-1. Navigate to the `frontend` folder:
-   ```bash
-   cd frontend
-   ```
+## ⚙️ Installation
 
-2. Install Node modules:
-   ```bash
-   npm i --f
-   ```
+### Backend Setup
 
-### Running the Project
+```bash
+# Clone repository
+git clone https://github.com/prathamesh-patil-5090/ReCra.git
+cd ReCra
 
-1. Start the Django server in one terminal:
-   ```bash
-   python manage.py runserver
-   ```
+# Create and activate virtual environment
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 
-2. Start the React development server in another terminal:
-   ```bash
-   cd frontend
-   npm start
-   ```
+# Install dependencies
+pip install -r requirements.txt
 
-By default:
-- React runs on [http://localhost:3000](http://localhost:3000)
-- Django runs on [http://localhost:8000](http://localhost:8000)
+# Environment setup
+cp .env.example .env  # Configure your environment variables
 
-### Important Notes
-- Ensure **CORS** and **CSRF tokens** are properly configured to enable smooth communication between the backend and frontend.
-- Users must register or log in to the database before accessing the Resume Creator and Analyzer features.
+# Database setup
+python manage.py makemigrations
+python manage.py migrate
 
-## Features
+# Create superuser (optional)
+python manage.py createsuperuser
+```
 
-1. **Resume Creator**:
-   - Highly customizable with drag-and-drop functionality for sections.
-   - Use `:` in the Skills section for formatting (e.g., `Languages: Python, Java`).
-   - Empty sections are automatically excluded from the resume.
+### Frontend Setup
 
-2. **Full Preview & PDF Download**:
-   - Utilize the full preview button to review your resume before finalizing.
-   - Download your resume as a PDF directly.
+```bash
+# Navigate to frontend directory
+cd frontend
 
-3. **Resume Analyzer**:
-   - Analyze your resume with ATS-like features to improve its quality.
+# Install dependencies
+npm install
 
-## Contribution
-I invite everyone to contribute to ReCra! Your valuable contributions will be acknowledged and credited in this project. 
+# Create environment file
+cp .env.example .env  # Configure your environment variables
+```
 
-### How to Contribute
-1. Fork the repository.
-2. Create a new branch for your feature or fix.
-3. Submit a pull request with a clear description of your changes.
+## 🚀 Development
 
-Together, let's make ReCra a powerful tool for resume creation and analysis!
+```bash
+# Start backend server
+python manage.py runserver
+
+# Start frontend development server (in a new terminal)
+cd frontend && npm start
+```
+
+Access the application:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
+- Admin Interface: http://localhost:8000/admin
+
+## 🔧 Configuration
+
+### CORS Setup
+
+Add your frontend URL to `CORS_ALLOWED_ORIGINS` in `settings.py`:
+
+```python
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",
+    "http://127.0.0.1:3000",
+]
+```
+
+### Environment Variables
+
+Required environment variables:
+
+```env
+DEBUG=True
+SECRET_KEY=your-secret-key
+DATABASE_URL=postgresql://user:password@localhost:5432/recra
+ALLOWED_HOSTS=localhost,127.0.0.1
+```
+
+## 🧪 Testing
+
+```bash
+# Run backend tests
+python manage.py test
+
+# Run frontend tests
+cd frontend && npm test
+```
+
+## 📦 Deployment
+
+1. Set `DEBUG=False` in production
+2. Configure proper database settings
+3. Set up static files serving
+4. Enable HTTPS
+5. Configure proper CORS settings
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit changes (`git commit -m 'Add amazing feature'`)
+4. Push to branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+### Contribution Guidelines
+
+- Follow PEP 8 for Python code
+- Use ESLint configuration for JavaScript
+- Write tests for new features
+- Update documentation as needed
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- [Django Documentation](https://docs.djangoproject.com/)
+- [React Documentation](https://reactjs.org/docs/)
+- [Material-UI](https://mui.com/)
+- All contributors who help improve ReCra
+
+## 📞 Support
+
+For support, email support@recra.com or open an issue in the repository.
