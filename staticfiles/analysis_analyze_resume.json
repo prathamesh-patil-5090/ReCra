@@ -2,6 +2,7 @@
     "message": "Detailed insights about the resume",
     "Missing Skills Analysis": {
         "Data Science": [
+            "database",
             "optimization",
             "algorithms"
         ],
@@ -17,7 +18,8 @@
             "reactjs",
             "nosql",
             "api",
-            "task queue"
+            "cloud",
+            "database"
         ],
         "Android Development": [
             "android",
@@ -41,7 +43,6 @@
             "figma",
             "zeplin",
             "balsamiq",
-            "ui",
             "prototyping",
             "wireframes",
             "storyframes",
@@ -52,21 +53,18 @@
             "illustrator",
             "adobe after effects",
             "after effects",
-            "adobe premier pro",
-            "premier pro",
             "adobe indesign",
             "indesign",
             "wireframe",
             "solid",
-            "grasp",
-            "user research"
+            "grasp"
         ],
         "Other Skills": [
+            "english",
             "communication",
             "writing",
             "microsoft office",
             "leadership",
-            "customer management",
             "social media"
         ]
     },
@@ -79,11 +77,11 @@
         "Other Skills": "<div class='skill-description'><h3>Keras</h3><p>Keras is a high-level neural network API written in Python, capable of running on top of TensorFlow, CNTK, or Theano.</p><h4>Key Features:</h4><ul><li>Modular architecture</li><li>User-friendly interface</li><li>Extensible design</li></ul><h4>Applications:</h4><ul><li>Computer vision</li><li>Text analysis</li><li>Recommendation systems</li></ul><h4>Career Benefits:</h4><p>Employers value Keras expertise as it signifies a solid foundation in AI and neural networks.</p><h4>Learning Path:</h4><ul><li>Basic sequential models</li><li>Custom layer development</li><li>GANs implementation</li></ul></div>"
     },
     "Feedback": [
-        "Enhance your Data Science skills by learning ['optimization', 'algorithms'].",
-        "Improve your Web Development skills by learning ['aws', 'azure', 'boto3', 'postgresql', 'rds', 'celery', 'sqs', 'lambda', 'reactjs', 'nosql', 'api', 'task queue'].",
-        "Expand your Android Development skills by learning ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy'].",
-        "Grow your iOS Development skills by learning ['ios', 'ios development', 'swift', 'cocoa', 'cocoa touch', 'xcode'].",
-        "Strengthen your UI/UX Design skills by learning ['ux', 'adobe xd', 'figma', 'zeplin', 'balsamiq', 'ui', 'prototyping', 'wireframes', 'storyframes', 'adobe photoshop', 'photoshop', 'editing', 'adobe illustrator', 'illustrator', 'adobe after effects', 'after effects', 'adobe premier pro', 'premier pro', 'adobe indesign', 'indesign', 'wireframe', 'solid', 'grasp', 'user research'].",
-        "Enhance your profile with additional skills like ['communication', 'writing', 'microsoft office', 'leadership', 'customer management', 'social media']."
+        "Key areas to focus on include machine learning, data analysis, and database, optimization, algorithms",
+        "Consider learning aws, azure, boto3, postgresql, rds, celery, sqs, lambda, reactjs, nosql, api, cloud, database to expand your web development capabilities",
+        "Adding android, android development, flutter, kotlin, xml, kivy would boost your Android development profile",
+        "Strengthen your iOS skills by mastering ios, ios development, swift, cocoa, cocoa touch, xcode",
+        "Modern design workflows often use ux, adobe xd, figma, zeplin, balsamiq, prototyping, wireframes, storyframes, adobe photoshop, photoshop, editing, adobe illustrator, illustrator, adobe after effects, after effects, adobe indesign, indesign, wireframe, solid, grasp",
+        "Adding english, communication, writing, microsoft office, leadership, social media would make you more well-rounded"
     ]
 }

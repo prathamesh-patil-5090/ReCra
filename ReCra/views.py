@@ -16,6 +16,10 @@ from django.views.decorators.http import require_http_methods
 from django.views.decorators.csrf import ensure_csrf_cookie
 from PyPDF2 import PdfReader
 import logging
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login, logout
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 # Set BASE_DIR and configure Django settings
 if __name__ == '__main__':
@@ -102,22 +106,30 @@ def extract_text_from_pdf(pdf_path):
     return text
 
 def analyze_skills(resume_text, skill_keywords):
-    missing_skills = [skill for skill in skill_keywords if skill not in resume_text]
-    # If no missing skills found, add the default skill for that category
-    if not missing_skills:
-        if skill_keywords == ds_keyword:
-            missing_skills = [default_missing_skills["Data Science"]]
-        elif skill_keywords == web_keyword:
-            missing_skills = [default_missing_skills["Web Development"]]
-        elif skill_keywords == android_keyword:
-            missing_skills = [default_missing_skills["Android Development"]]
-        elif skill_keywords == ios_keyword:
-            missing_skills = [default_missing_skills["iOS Development"]]
-        elif skill_keywords == uiux_keyword:
-            missing_skills = [default_missing_skills["UI/UX Design"]]
-        elif skill_keywords == n_any:
-            missing_skills = [default_missing_skills["Other Skills"]]
-    return missing_skills
+    """Enhanced skill analysis with limited and randomized results"""
+    if not resume_text or not skill_keywords:
+        return []
+        
+    resume_text = resume_text.lower()
+    missing_skills = []
+    
+    try:
+        for skill in skill_keywords:
+            skill_lower = skill.lower()
+            if skill_lower not in resume_text:
+                # Check for partial matches
+                words = skill_lower.split()
+                if not any(word in resume_text for word in words):
+                    missing_skills.append(skill)
+        
+        # Randomly select 2-3 skills if more are available
+        if len(missing_skills) > 3:
+            return random.sample(missing_skills, random.randint(2, 3))
+        return missing_skills
+        
+    except Exception as e:
+        logging.error(f"Error in skill analysis: {str(e)}")
+        return []
 
 def lemmatize_word(word):
     return nlp(word)[0].lemma_
@@ -151,143 +163,145 @@ def get_response(prediction):
     return "Sorry, I didn't understand that."
 
 def provide_feedback(missing_skills_summary):
+    """Enhanced feedback with more focused suggestions"""
+    if not missing_skills_summary:
+        return ["Your resume looks good! Consider adding more specific technical skills to stand out further."]
+
     feedback = []
-    if missing_skills_summary.get("Data Science"):
-        feedback.append(f"Enhance your Data Science skills by learning {missing_skills_summary['Data Science']}.")
-    if missing_skills_summary.get("Web Development"):
-        feedback.append(f"Improve your Web Development skills by learning {missing_skills_summary['Web Development']}.")
-    if missing_skills_summary.get("Android Development"):
-        feedback.append(f"Expand your Android Development skills by learning {missing_skills_summary['Android Development']}.")
-    if missing_skills_summary.get("iOS Development"):
-        feedback.append(f"Grow your iOS Development skills by learning {missing_skills_summary['iOS Development']}.")
-    if missing_skills_summary.get("UI/UX Design"):
-        feedback.append(f"Strengthen your UI/UX Design skills by learning {missing_skills_summary['UI/UX Design']}.")
-    if missing_skills_summary.get("Other Skills"):
-        feedback.append(f"Enhance your profile with additional skills like {missing_skills_summary['Other Skills']}.")
+    templates = {
+        "Data Science": [
+            "Focus on key Data Science skills: {}. These are highly valued in the industry.",
+            "Consider strengthening your profile with {}, which are core Data Science skills.",
+        ],
+        "Web Development": [
+            "Enhance your Web Development toolkit with {}. These are in-demand skills.",
+            "Modern web development often requires {}. Consider adding these to your skillset.",
+        ],
+        "Android Development": [
+            "To strengthen your Android Development skills, focus on: {}",
+            "Mobile development skills like {} are highly sought after.",
+        ],
+        "iOS Development": [
+            "For iOS Development, prioritize learning: {}",
+            "Key iOS development skills to consider: {}",
+        ],
+        "UI/UX Design": [
+            "Enhance your UI/UX Design portfolio with: {}",
+            "Popular design tools you might want to learn: {}",
+        ],
+        "Other Skills": [
+            "Consider developing these professional skills: {}",
+            "Strengthen your profile with these soft skills: {}"
+        ]
+    }
+
+    for domain, skills in missing_skills_summary.items():
+        if skills:
+            skills_text = ", ".join(skills)
+            template = random.choice(templates.get(domain, ["Consider learning: {}"]))
+            feedback.append(template.format(skills_text))
+
     return feedback
 
 @require_http_methods(["POST", "OPTIONS"])
 @ensure_csrf_cookie
 @csrf_exempt
 def analyze_resume_view(request):
+    """Resume analysis focusing on skill gaps and current strengths"""
     if request.method == "OPTIONS":
         response = HttpResponse()
-        response["Access-Control-Allow-Origin"] = "*"  # Or your specific origin
+        response["Access-Control-Allow-Origin"] = "http://localhost:3000"
         response["Access-Control-Allow-Methods"] = "POST, OPTIONS"
         response["Access-Control-Allow-Headers"] = "Content-Type, X-CSRFToken"
         return response
 
     if request.method == 'POST':
-        if not request.content_type or not request.content_type.startswith('multipart/form-data'):
-            return JsonResponse({'error': 'Invalid content type. Must be multipart/form-data.'}, status=400)
         try:
-            # Log incoming headers, files, and POST data
-            logging.debug(f"Headers: {request.headers}")
-            logging.debug(f"Files: {list(request.FILES.keys())}")
-            logging.debug(f"POST data: {request.POST}")
-
-            # Accept both 'resume' and 'file' keys
-            pdf_file = request.FILES.get('resume') or request.FILES.get('file')
-            job_description = request.POST.get('job_description', '')
-
-            if not pdf_file:
+            # Validate content type
+            if not request.content_type or 'multipart/form-data' not in request.content_type:
                 return JsonResponse(
-                    {"error": "No resume file provided"},
-                    status=400,
-                    headers={
-                        "Access-Control-Allow-Origin": "http://localhost:3000",
-                        "Access-Control-Allow-Credentials": "true"
-                    }
+                    {"error": "Invalid content type. Must be multipart/form-data."},
+                    status=400
                 )
 
-            job_data = {
-                "title": "Job Position",
-                "location": "Location",
-                "description": job_description,
-                "requirements": [skill for skill in web_keyword if skill.lower() in job_description.lower()]
-            }
+            # Get and validate file
+            pdf_file = request.FILES.get('resume') or request.FILES.get('file')
+            if not pdf_file:
+                return JsonResponse({"error": "No file provided"}, status=400)
+            
+            if not pdf_file.name.lower().endswith('.pdf'):
+                return JsonResponse({"error": "File must be a PDF"}, status=400)
 
-            with open(os.path.join(BASE_DIR, 'ReCra', 'models', 'job_dec.json'), 'w') as f:
-                json.dump(job_data, f, indent=4)
-
+            # Create temp directory if it doesn't exist
             temp_dir = os.path.join(BASE_DIR, 'temp')
             os.makedirs(temp_dir, exist_ok=True)
+            
+            # Save and process file
             pdf_path = os.path.join(temp_dir, pdf_file.name)
-            with open(pdf_path, 'wb+') as temp_file:
-                for chunk in pdf_file.chunks():
-                    temp_file.write(chunk)
-
             try:
+                with open(pdf_path, 'wb+') as dest:
+                    for chunk in pdf_file.chunks():
+                        dest.write(chunk)
+
                 resume_text = extract_text_from_pdf(pdf_path)
+                if not resume_text.strip():
+                    raise ValueError("Could not extract text from PDF")
+                
                 resume_text = clean_text(resume_text)
-
-                missing_skills_summary = {
-                    "Data Science": analyze_skills(resume_text, ds_keyword),
-                    "Web Development": analyze_skills(resume_text, web_keyword),
-                    "Android Development": analyze_skills(resume_text, android_keyword),
-                    "iOS Development": analyze_skills(resume_text, ios_keyword),
-                    "UI/UX Design": analyze_skills(resume_text, uiux_keyword),
-                    "Other Skills": analyze_skills(resume_text, n_any)
+                
+                # Analyze present skills
+                present_skills = {
+                    "Data Science": [s for s in ds_keyword if s in resume_text],
+                    "Web Development": [s for s in web_keyword if s in resume_text],
+                    "Android Development": [s for s in android_keyword if s in resume_text],
+                    "iOS Development": [s for s in ios_keyword if s in resume_text],
+                    "UI/UX Design": [s for s in uiux_keyword if s in resume_text],
+                    "Other Skills": [s for s in n_any if s in resume_text]
                 }
 
-                feedback = provide_feedback(missing_skills_summary)
+                # Analyze missing skills
+                missing_skills = {
+                    category: list(set(keywords) - set(present_skills[category]))
+                    for category, keywords in {
+                        "Data Science": ds_keyword,
+                        "Web Development": web_keyword,
+                        "Android Development": android_keyword,
+                        "iOS Development": ios_keyword,
+                        "UI/UX Design": uiux_keyword,
+                        "Other Skills": n_any
+                    }.items()
+                }
 
-                chatbot_responses = {}
-                for domain, skill_list in missing_skills_summary.items():
-                    for skill in skill_list:
-                        if skill_list:
-                            prediction = predict_class(skill)
-                            chatbot_responses[domain] = get_response(prediction)
-
+                # Generate analysis summary
                 output_data = {
-                    "Missing Skills Analysis": missing_skills_summary,
-                    "Chatbot Responses": chatbot_responses,
-                    "Feedback": feedback,
-                    "Job Description": job_description
+                    "Present Skills": present_skills,
+                    "Missing Skills": missing_skills,
+                    "Analysis Summary": {
+                        category: {
+                            "strength": f"{len(present_skills[category])}/{len(present_skills[category] + missing_skills[category])} skills present",
+                            "gap_percentage": round((len(missing_skills[category]) / (len(present_skills[category] + missing_skills[category]))) * 100, 1)
+                        }
+                        for category in present_skills.keys()
+                    }
                 }
 
-                # Save result to staticfiles
-                output_path = os.path.join(settings.STATIC_ROOT, 'analysis_analyze_resume.json')
-                os.makedirs(os.path.dirname(output_path), exist_ok=True)
-                with open(output_path, 'w') as out_file:
-                    json.dump(output_data, out_file, indent=4)
-
-                response = JsonResponse(output_data)
-                response["Access-Control-Allow-Origin"] = "http://localhost:3000"
-                response["Access-Control-Allow-Credentials"] = "true"
-                return response
+                return JsonResponse(output_data)
 
             except Exception as e:
-                return JsonResponse(
-                    {"error": "Error processing file: {}".format(str(e))},
-                    status=500,
-                    headers={
-                        "Access-Control-Allow-Origin": "http://localhost:3000",
-                        "Access-Control-Allow-Credentials": "true"
-                    }
-                )
+                logging.error(f"Error processing file: {str(e)}")
+                return JsonResponse({"error": f"Error processing file: {str(e)}"}, status=500)
             finally:
                 if os.path.exists(pdf_path):
-                    os.remove(pdf_path)
+                    try:
+                        os.remove(pdf_path)
+                    except Exception as e:
+                        logging.error(f"Error removing temporary file: {str(e)}")
 
         except Exception as e:
-            return JsonResponse(
-                {"error": "Server error: {}".format(str(e))},
-                status=500,
-                headers={
-                    "Access-Control-Allow-Origin": "http://localhost:3000",
-                    "Access-Control-Allow-Credentials": "true"
-                }
-            )
+            logging.error(f"Server error: {str(e)}")
+            return JsonResponse({"error": f"Server error: {str(e)}"}, status=500)
 
-    return JsonResponse(
-        {"error": "Invalid request method"},
-        status=405,
-        headers={
-            "Access-Control-Allow-Origin": "http://localhost:3000",
-            "Access-Control-Allow-Credentials": "true"
-        }
-    )
+    return JsonResponse({"error": "Method not allowed"}, status=405)
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
@@ -362,60 +376,106 @@ def analyze_resume(request):
 
 @csrf_exempt
 def suggest_improvements(request):
+    """Enhanced suggestions with prioritized recommendations"""
     if request.method == 'POST':
         try:
-            # Accept both 'resume' and 'file' keys
+            # Validate content type and file
+            if not request.content_type or 'multipart/form-data' not in request.content_type:
+                return JsonResponse({"error": "Invalid content type"}, status=400)
+
             pdf_file = request.FILES.get('resume') or request.FILES.get('file')
-            
-            if not pdf_file:
-                return JsonResponse(
-                    {"error": "No resume file provided"},
-                    status=400,
-                    headers={
-                        "Access-Control-Allow-Origin": "http://localhost:3000",
-                        "Access-Control-Allow-Credentials": "true"
+            if not pdf_file or not pdf_file.name.lower().endswith('.pdf'):
+                return JsonResponse({"error": "Invalid or missing PDF file"}, status=400)
+
+            temp_dir = os.path.join(BASE_DIR, 'temp')
+            os.makedirs(temp_dir, exist_ok=True)
+            pdf_path = os.path.join(temp_dir, pdf_file.name)
+
+            try:
+                with open(pdf_path, 'wb+') as dest:
+                    for chunk in pdf_file.chunks():
+                        dest.write(chunk)
+
+                resume_text = extract_text_from_pdf(pdf_path)
+                if not resume_text.strip():
+                    raise ValueError("Could not extract text from PDF")
+
+                resume_text = clean_text(resume_text)
+                
+                # Analyze skills with priority levels
+                skill_analysis = {}
+                for category, keywords in {
+                    "Data Science": ds_keyword,
+                    "Web Development": web_keyword,
+                    "Android Development": android_keyword,
+                    "iOS Development": ios_keyword,
+                    "UI/UX Design": uiux_keyword,
+                    "Other Skills": n_any
+                }.items():
+                    present = [s for s in keywords if s in resume_text]
+                    missing = list(set(keywords) - set(present))
+                    
+                    # Calculate category strength
+                    strength = len(present) / len(keywords) if keywords else 0
+                    
+                    # Prioritize missing skills
+                    priority_skills = {
+                        "critical": missing[:2],  # Top 2 most important missing skills
+                        "important": missing[2:5],  # Next 3 important skills
+                        "optional": missing[5:]  # Remaining skills
                     }
-                )
-            
-            pdf_path = os.path.join(BASE_DIR, 'temp', pdf_file.name)
-            with open(pdf_path, 'wb') as temp_file:
-                for chunk in pdf_file.chunks():
-                    temp_file.write(chunk)
+                    
+                    skill_analysis[category] = {
+                        "strength": strength,
+                        "present_skills": present,
+                        "priority_improvements": priority_skills
+                    }
 
-            resume_text = extract_text_from_pdf(pdf_path)
-            resume_text = clean_text(resume_text)
+                # Generate personalized recommendations
+                recommendations = []
+                for category, analysis in skill_analysis.items():
+                    if analysis["priority_improvements"]["critical"]:
+                        recommendations.append({
+                            "category": category,
+                            "priority": "High",
+                            "message": f"Focus on mastering these critical {category} skills first: {', '.join(analysis['priority_improvements']['critical'])}",
+                            "impact": "These skills are fundamental and will significantly improve your profile."
+                        })
+                    
+                    if analysis["priority_improvements"]["important"]:
+                        recommendations.append({
+                            "category": category,
+                            "priority": "Medium",
+                            "message": f"After mastering the basics, learn these important skills: {', '.join(analysis['priority_improvements']['important'])}",
+                            "impact": "These skills will make you more competitive in the job market."
+                        })
 
-            missing_skills_summary = {
-                "Data Science": analyze_skills(resume_text, ds_keyword),
-                "Web Development": analyze_skills(resume_text, web_keyword),
-                "Android Development": analyze_skills(resume_text, android_keyword),
-                "iOS Development": analyze_skills(resume_text, ios_keyword),
-                "UI/UX Design": analyze_skills(resume_text, uiux_keyword),
-                "Other Skills": analyze_skills(resume_text, n_any)
-            }
+                output_data = {
+                    "Skill Analysis": skill_analysis,
+                    "Prioritized Recommendations": recommendations,
+                    "Learning Path": {
+                        category: {
+                            "Current Level": "Beginner" if analysis["strength"] < 0.3 else "Intermediate" if analysis["strength"] < 0.7 else "Advanced",
+                            "Next Steps": recommendations[i]["message"] if i < len(recommendations) else "Keep improving your existing skills"
+                        }
+                        for i, (category, analysis) in enumerate(skill_analysis.items())
+                    }
+                }
 
-            feedback = provide_feedback(missing_skills_summary)
+                return JsonResponse(output_data)
 
-            output_data = {
-                "message": "Recommendations to enhance your profile",
-                "Feedback": feedback
-            }
+            except Exception as e:
+                logging.error(f"Error processing file: {str(e)}")
+                return JsonResponse({"error": f"Error processing file: {str(e)}"}, status=500)
+            finally:
+                if os.path.exists(pdf_path):
+                    os.remove(pdf_path)
 
-            # Modify the output path to save in the 'result' directory
-            out_path = os.path.join(BASE_DIR, 'result', 'suggest_improvements_result.json')
-            os.makedirs(os.path.dirname(out_path), exist_ok=True)
-            with open(out_path, 'w') as out_file:
-                json.dump(output_data, out_file, indent=4)
-
-            static_path = os.path.join(settings.STATIC_ROOT, 'analysis_improve_skills.json')
-            with open(static_path, 'w') as out_file:
-                json.dump(output_data, out_file, indent=4)
-
-            os.remove(pdf_path)
-            return JsonResponse(output_data)
         except Exception as e:
-            return JsonResponse({"error": str(e)}, status=500)
-    return JsonResponse({"error": "Invalid request method"}, status=400)
+            logging.error(f"Server error: {str(e)}")
+            return JsonResponse({"error": f"Server error: {str(e)}"}, status=500)
+
+    return JsonResponse({"error": "Method not allowed"}, status=405)
 
 def extract_skills_from_job_description(job_description):
     text = clean_text(job_description)
@@ -616,6 +676,84 @@ def test_check_match():
 
     except Exception as e:
         print(f"Error: {str(e)}")
+
+@csrf_exempt
+def register_user(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            first_name = data.get('firstName')
+            last_name = data.get('lastName')
+            email = data.get('email')
+            password = data.get('password')
+
+            # Validate email
+            try:
+                validate_email(email)
+            except ValidationError:
+                return JsonResponse({'error': 'Invalid email address'}, status=400)
+
+            # Check if user already exists
+            if User.objects.filter(email=email).exists():
+                return JsonResponse({'error': 'Email already registered'}, status=400)
+
+            # Create user
+            user = User.objects.create_user(
+                username=email,
+                email=email,
+                password=password,
+                first_name=first_name,
+                last_name=last_name
+            )
+
+            # Log the user in
+            login(request, user)
+
+            return JsonResponse({
+                'message': 'Registration successful',
+                'user': {
+                    'email': user.email,
+                    'firstName': user.first_name,
+                    'lastName': user.last_name
+                }
+            })
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@csrf_exempt
+def login_user(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            email = data.get('email')
+            password = data.get('password')
+
+            user = authenticate(request, username=email, password=password)
+            if user is not None:
+                login(request, user)
+                return JsonResponse({
+                    'message': 'Login successful',
+                    'user': {
+                        'email': user.email,
+                        'firstName': user.first_name,
+                        'lastName': user.last_name
+                    }
+                })
+            else:
+                return JsonResponse({'error': 'Invalid credentials'}, status=401)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=500)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+@csrf_exempt
+def logout_user(request):
+    if request.method == 'POST':
+        logout(request)
+        return JsonResponse({'message': 'Logout successful'})
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 if __name__ == '__main__':
     while True:

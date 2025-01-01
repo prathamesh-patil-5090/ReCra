@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
+import { useAuth } from '../contexts/AuthContext'; // Fixed import path
 
 const SignUp = () => {
     const { signup } = useAuth();
@@ -56,10 +56,15 @@ const SignUp = () => {
 
         try {
             setIsLoading(true);
-            await signup(formData);
-            navigate('/dashboard');
+            await signup({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                password: formData.password
+            });
+            navigate('/'); // Changed from /dashboard to /
         } catch (err) {
-            setError(err.message || 'Sign up failed. Please try again.');
+            setError(err.message);
         } finally {
             setIsLoading(false);
         }

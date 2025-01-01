@@ -1,12 +1,12 @@
 import React from 'react';
 import { ArrowRight, FileText, Upload, Search, Star, Users, Award, Briefcase } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext'; // Add this import
+import { useAuth } from '../contexts/AuthContext'; // Update the import path
 import StepCard from './stepCard';
 
 const HomePage = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useAuth(); // Add this line
+  const { isAuthenticated } = useAuth();
   
   const handleGetStarted = () => {
     if (isAuthenticated) {

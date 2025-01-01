@@ -30,6 +30,9 @@ urlpatterns = [
     path('check_match/', views.check_match, name='check_match'),
     path('analysis/<str:analysis_type>/', views.serve_analysis_json, name='serve_analysis_json'),
     path('analysis-analyze-resume/', views.get_analysis_analyze_resume, name='analysis_analyze_resume'),
+    path('api/register/', views.register_user, name='register'),
+    path('api/login/', views.login_user, name='login'),
+    path('api/logout/', views.logout_user, name='logout'),
 
     # Catch-all pattern to serve frontend's index.html
     re_path(r'^.*$', TemplateView.as_view(template_name='index.html')),

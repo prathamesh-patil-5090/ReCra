@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from './context/AuthContext';
+import { useAuth } from '../contexts/AuthContext'; // Fixed import path
 import Spinner from './common/Spinner';
 import { Github, Mail } from 'lucide-react';
 
@@ -43,8 +43,12 @@ const Login = () => {
 
         try {
             setIsLoading(true);
-            await login(formData);
-            navigate('/dashboard'); // or wherever you want to redirect after login
+            await login({
+                email: formData.email,
+                password: formData.password,
+                remember: formData.rememberMe
+            });
+            navigate('/'); // Changed from /dashboard to /
         } catch (err) {
             setError(err.message || 'Login failed. Please try again.');
         } finally {

@@ -1,71 +1,55 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, User, LogOut } from 'lucide-react';
-import { useAuth } from './context/AuthContext';
+import { Link, useNavigate } from 'react-router-dom';
+import { Menu, X, User, LogOut } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 import LogoAnimation from '../animations/Vanilla@1x-1.0s-280px-250px.svg';
 
-const NavBar = ({ menuItems }) => {
+const NavBar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dropdownOpenIndex, setDropdownOpenIndex] = useState(null);
   const { isAuthenticated, logout, user } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
 
   const defaultMenuItems = [
     { title: 'Home', path: '/' },
-    { title: 'Resume Creator', path: '/create-resume' },
-    { title: 'Resume Analyzer', path: '/analyze-resume' },
+    { title: 'Resume Creator', path: '/create-resume', protected: true },
+    { title: 'Resume Analyzer', path: '/analyze-resume', protected: true },
     { title: 'Pricing', path: '/pricing' },
     { title: 'About', path: '/about' },
   ];
 
-  const items = menuItems || defaultMenuItems;
-
   return (
     <nav className="relative bg-white border-b">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-12.5 items-center justify-between">
-          <div className="flex items-center">
-            <Link to="/" className="h-16">
-              <img src={LogoAnimation} alt="ReCra Logo" className="h-full w-auto" />
+        <div className="flex h-16 items-center justify-between">
+          {/* Logo - Adjusted size */}
+          <div className="flex-shrink-0">
+            <Link to="/" className="h-14"> {/* Changed from h-16 to h-12 */}
+              <img 
+                src={LogoAnimation} 
+                alt="ReCra Logo" 
+                className="h-full w-auto max-h-14" // Added max-h-12 and kept aspect ratio
+              />
             </Link>
           </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-center space-x-6">
-              {items.map((item, index) => (
-                item.submenu ? (
-                  <div
-                    key={item.title}
-                    className="relative"
-                    onMouseEnter={() => setDropdownOpenIndex(index)}
-                    onMouseLeave={() => setDropdownOpenIndex(null)}
-                  >
-                    <button
-                      className="flex items-center space-x-1 px-3 py-2 text-gray-600 hover:text-black font-medium transition-colors duration-200"
-                      aria-expanded={dropdownOpenIndex === index}
-                    >
-                      <span>{item.title}</span>
-                      <ChevronDown className="h-4 w-4" />
-                    </button>
-                    {dropdownOpenIndex === index && (
-                      <div className="absolute left-0 mt-2 w-48 rounded-xl bg-white py-2 shadow-lg ring-1 ring-black ring-opacity-5">
-                        {item.submenu.map((subItem) => (
-                          <Link
-                            key={subItem.title}
-                            to={subItem.path}
-                            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                          >
-                            {subItem.title}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                ) : (
+          {/* Desktop Navigation - Justified */}
+          <div className="hidden sm:flex flex-1 justify-center">
+            <div className="flex space-x-12">
+              {defaultMenuItems.map((item) => (
+                (!item.protected || isAuthenticated) && (
                   <Link
                     key={item.title}
                     to={item.path}
-                    className="px-3 py-2 text-gray-600 hover:text-black font-medium transition-colors duration-300"
+                    className="text-gray-600 hover:text-black font-medium transition-colors duration-200 whitespace-nowrap"
                   >
                     {item.title}
                   </Link>
@@ -74,41 +58,43 @@ const NavBar = ({ menuItems }) => {
             </div>
           </div>
 
-          {/* Login and Sign-Up or Logout */}
-          <div className="hidden items-center space-x-4 md:flex">
+          {/* Auth Buttons */}
+          <div className="hidden sm:flex items-center space-x-4">
             {isAuthenticated ? (
               <div className="flex items-center space-x-4">
-                <span className="text-gray-600">{user?.firstName || 'User'}</span>
+                <span className="text-gray-600">Welcome, {user?.firstName || 'User'}</span>
                 <button
-                  onClick={logout}
-                  className="flex items-center rounded-lg bg-black px-6 py-2.5 text-white transition-colors hover:bg-gray-800 font-medium"
+                  onClick={handleLogout}
+                  className="flex items-center text-gray-600 hover:text-black"
                 >
-                  <LogOut className="mr-2 h-5 w-5" />
+                  <LogOut className="h-5 w-5 mr-2" />
                   Logout
                 </button>
               </div>
             ) : (
-              <>
-                <Link to="/login" className="flex items-center text-gray-600 hover:text-black font-medium">
-                  <User className="mr-2 h-5 w-5" />
+              <div className="flex items-center space-x-4">
+                <Link
+                  to="/login"
+                  className="text-gray-600 hover:text-black"
+                >
+                  <User className="h-5 w-5 inline-block mr-2" />
                   Login
                 </Link>
                 <Link
                   to="/signup"
-                  className="rounded-lg bg-black px-6 py-2.5 text-white transition-colors hover:bg-gray-800 font-medium"
+                  className="bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
                 >
                   Sign Up
                 </Link>
-              </>
+              </div>
             )}
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden">
+          <div className="sm:hidden">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-              className="inline-flex items-center justify-center rounded-lg p-2 text-gray-400 hover:bg-gray-100 transition-colors duration-200"
+              className="p-2 rounded-md text-gray-400 hover:text-gray-500"
             >
               {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -118,65 +104,55 @@ const NavBar = ({ menuItems }) => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute w-full bg-white shadow-lg z-50">
-          <div className="space-y-1 px-4 py-4">
-            {items.map((item) => (
-              <React.Fragment key={item.title}>
-                {item.submenu ? (
-                  <>
-                    <div className="px-3 py-2 text-base font-medium text-gray-900">
-                      {item.title}
-                    </div>
-                    {item.submenu.map((subItem) => (
-                      <Link
-                        key={subItem.title}
-                        to={subItem.path}
-                        onClick={() => setIsMenuOpen(false)}
-                        className="block px-3 py-2 pl-8 text-base text-gray-500 hover:bg-gray-50 transition-colors duration-200"
-                      >
-                        {subItem.title}
-                      </Link>
-                    ))}
-                  </>
-                ) : (
-                  <Link
-                    to={item.path}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="block px-3 py-2 text-base text-gray-600 hover:bg-gray-50 rounded-lg transition-colors duration-200"
-                  >
-                    {item.title}
-                  </Link>
-                )}
-              </React.Fragment>
-            ))}
-            <div className="mt-4 space-y-2">
-              {isAuthenticated ? (
-                <button
-                  onClick={() => {
-                    logout();
-                    setIsMenuOpen(false);
-                  }}
-                  className="block w-full px-3 py-2 text-base text-white bg-black hover:bg-gray-800 rounded-lg text-center"
+        <div className="sm:hidden">
+          <div className="px-2 pt-2 pb-3 space-y-1">
+            {defaultMenuItems.map((item) => (
+              (!item.protected || isAuthenticated) && (
+                <Link
+                  key={item.title}
+                  to={item.path}
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block px-3 py-2 text-base text-gray-600 hover:text-black hover:bg-gray-50 rounded-md"
                 >
-                  Logout
-                </button>
+                  {item.title}
+                </Link>
+              )
+            ))}
+            <div className="border-t border-gray-200 pt-4 pb-3">
+              {isAuthenticated ? (
+                <div className="space-y-1">
+                  <div className="px-3 py-2 text-base text-gray-600">
+                    Welcome, {user?.firstName || 'User'}
+                  </div>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsMenuOpen(false);
+                    }}
+                    className="w-full flex items-center px-3 py-2 text-base text-gray-600 hover:text-black hover:bg-gray-50 rounded-md"
+                  >
+                    <LogOut className="h-5 w-5 mr-2" />
+                    Logout
+                  </button>
+                </div>
               ) : (
-                <>
+                <div className="space-y-1">
                   <Link
                     to="/login"
                     onClick={() => setIsMenuOpen(false)}
-                    className="block px-3 py-2 text-base text-gray-600 hover:bg-gray-50 rounded-lg"
+                    className="flex items-center px-3 py-2 text-base text-gray-600 hover:text-black hover:bg-gray-50 rounded-md"
                   >
+                    <User className="h-5 w-5 mr-2" />
                     Login
                   </Link>
                   <Link
                     to="/signup"
                     onClick={() => setIsMenuOpen(false)}
-                    className="block px-3 py-2 text-base text-white bg-black hover:bg-gray-800 rounded-lg text-center"
+                    className="block text-center m-2 bg-black text-white px-4 py-2 rounded-lg hover:bg-gray-800"
                   >
                     Sign Up
                   </Link>
-                </>
+                </div>
               )}
             </div>
           </div>

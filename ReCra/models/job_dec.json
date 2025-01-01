@@ -1,10 +1,6 @@
 {
     "title": "Job Position",
     "location": "Location",
-    "description": "\"Looking for a web developer with experience in Python, Django, React, and SQL\"",
-    "requirements": [
-        "django",
-        "python",
-        "sql"
-    ]
+    "description": "",
+    "requirements": []
 }
