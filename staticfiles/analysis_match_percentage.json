@@ -1,14 +1,10 @@
 {
   "Matched Skills": {
     "Data Science": [
-      "sql",
-      "python"
+      "sql"
     ],
     "Web Development": [
-      "sql",
-      "javascript",
-      "django",
-      "python"
+      "sql"
     ],
     "Android Development": [],
     "iOS Development": [],
@@ -17,19 +13,23 @@
   },
   "Missing Skills": {
     "Data Science": [
-      "database"
+      "python/data analysis"
     ],
     "Web Development": [
-      "api",
-      "database"
+      "rds"
     ],
-    "Android Development": [],
-    "iOS Development": [],
+    "Android Development": [
+      "xml",
+      "android"
+    ],
+    "iOS Development": [
+      "ios",
+      "ios development"
+    ],
     "UI/UX Design": [
-      "solid"
+      "ui",
+      "ux"
     ],
-    "Other Skills": [
-      "communication"
-    ]
+    "Other Skills": []
   }
 }
