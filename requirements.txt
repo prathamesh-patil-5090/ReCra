@@ -60,7 +60,7 @@ tensorboard==2.18.0
 tensorboard-data-server==0.7.2
 tensorflow==2.18.0
 tensorflow-io-gcs-filesystem==0.31.0
-tensorflow_intel==2.18.0
+tensorflow_intel
 termcolor==2.5.0
 thinc==8.3.3
 tqdm==4.67.1
